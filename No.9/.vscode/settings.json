@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "ppmlib.h": "c",
+        "string.h": "c"
+    }
+}

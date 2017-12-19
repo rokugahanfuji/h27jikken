@@ -1,0 +1,691 @@
+
+<!-- saved from url=(0082)https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="http://tera01.gifu-nct.ac.jp/moodle/theme/standard/styles.php">
+<link rel="stylesheet" type="text/css" href="http://tera01.gifu-nct.ac.jp/moodle/theme/standardwhite/styles.php">
+
+<title>画像処理</title>
+
+</head><body bgcolor="white">
+<h1><font color="red">■</font><font color="orange">■</font>
+画像処理<font color="orange">■</font><font color="red">■</font></h1>
+<h1><font color="blue">■</font>準備</h1>
+
+(1) 必要なファイルを下記よりダウンロードする。
+
+<blockquote>
+<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/imgpro.tar.gz">imgpro.tar.gz</a>
+</blockquote>
+
+kterm を起動し，プログラムを展開し，コンパイルする。
+
+<blockquote>
+ec50% zcat imgpro.tar.gz | tar xvf -<br>
+ec50% cd imgpro<br>
+ec50% make
+</blockquote>
+
+<h1><font color="blue">■</font>画像ファイル</h1>
+
+用意される画像ファイルは以下の６つ。
+
+<blockquote>
+kanji.pgm<br>
+image1s.pgm<br>
+image2s.pgm<br>
+image3s.pgm<br>
+fruits.pgm<br>
+czp.pgm
+</blockquote>
+
+<h1><font color="blue">■</font>コマンド使用法</h1>
+
+<font color="skyblue">◆</font><a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#display">表示</a><br>
+
+<font color="skyblue">◆</font><a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#density">濃度変換</a><br>
+　　<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#histimage">ヒストグラム画像作成</a>・
+<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#threshold">２値化</a>・
+<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#amplify">濃度値ｎ倍</a><br>
+　　<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#liexpand">濃度値線形変換</a>・
+<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#histplane">ヒストグラム平坦化</a>・
+<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#reverce">濃度値反転</a><br>
+
+<font color="skyblue">◆</font><a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#filter">フィルタリング</a><br>
+　　<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#gradient">１次微分</a>・
+<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#laplacian">２次微分</a>・
+<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#template">テンプレート輪郭抽出</a><br>
+　　<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#smooth">平滑化（移動平均フィルタ，メディアンフィルタ）</a><br>
+
+<font color="skyblue">◆</font><a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#binary">２値処理</a><br>
+　　<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#thinning">細線化</a>・
+<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#labeling">ラベリング</a>・
+<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#features">特徴検出</a><br>
+　　<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#exfeatures">特徴による抽出</a><br>
+
+<font color="skyblue">◆</font><a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#mask">マスク処理</a><br>
+
+<font color="skyblue">◆</font><a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#geometrical">幾何学変換</a><br>
+　　<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#scale">拡大・縮小（最近傍法，線形補間法）</a>・
+<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#move">位置の移動</a>・
+<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#rotation">回転</a><br>
+　　<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#affine">アフィン変換（拡大縮小・回転・移動）</a>・
+<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#perspect">透視変換</a><br>
+
+<font color="skyblue">◆</font><a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#sampling">標本化・量子化</a><br>
+　　<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#sample">再標本化</a>・
+<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#quantize">再量子化</a><br>
+
+<font color="skyblue">◆</font><a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#fourier">フーリエ変換</a><br>
+　　<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#fft">ＦＦＴ</a>・
+<a href="https://lms.gifu-nct.ac.jp/pluginfile.php/37497/mod_resource/content/3/sj_img.html#fftfilter">ＦＦＴフィルタ</a><br>
+
+<a name="display">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> display（画像の表示）</h2>
+<blockquote>
+display　画像ファイル
+<br><br>
+【例】 kanji.pgm を表示
+<br>
+<blockquote>
+display kanji.pgm
+</blockquote>
+<br>
+終了するには Ctrl キーを押しながら Q を押す。<br>
+または，画面中で左クリックするとメニューが現れるので，
+File から Quit を選ぶ。
+</blockquote>
+
+</a><a name="density">
+</a><a name="histimage">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> histimage（ヒストグラム画像作成）</h2>
+<blockquote>
+histimage　[オプション]　入力画像　出力画像
+<br><br>
+<blockquote>
+オプション<br><br>
+<dl>
+<dt> -s
+</dt><dd> 平滑化を行なう。
+</dd></dl>
+</blockquote>
+<br>
+【例】kanji.pgm をヒストグラムを平滑化し，kekka.pgm に保存。
+<br>
+<blockquote>
+histimage -s kanji.pgm kekka.pgm
+</blockquote>
+</blockquote>
+
+</a><a name="threshold">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> threshold（２値化）</h2>
+<blockquote>
+threshold　[オプション]　入力画像　出力画像
+<br><br>
+<blockquote>
+オプション<br><br>
+<dl>
+<dt> -t n
+</dt><dd> しきい値を n にする（デフォルト 128）。
+</dd><dt> -r
+</dt><dd> 白黒反転する。
+</dd></dl>
+</blockquote>
+<br>
+【例】しきい値 140 で kanji.pgm を反転２値化し，kekka.pgm に保存。
+<br>
+<blockquote>
+threshold -t 140 -r kanji.pgm kekka.pgm
+</blockquote>
+<br>
+【例】ラベリング画像 label.pgm からマスク画像を作成し mask.pgm に保存。
+<blockquote>
+threshold -t 99 label.pgm mask.pgm
+</blockquote>
+</blockquote>
+
+</a><a name="amplify" )="" <!---="" ---------------------------------="" ---="">
+<h2><font size="-2" color="darkblue">■</font> amplify（濃度値n倍）</h2>
+<blockquote>
+amplify　[オプション]　入力画像　出力画像
+<br><br>
+<blockquote>
+オプション<br><br>
+<dl>
+<dt> -n x
+</dt><dd> 濃度値を x 倍する（デフォルト 2）
+</dd></dl>
+</blockquote>
+<br>
+【例】kanji.pgm の濃度値を 1.5 倍して，kekka.pgm に保存。
+<br>
+<blockquote>
+amplify -n 1.5 kanji.pgm kekka.pgm
+</blockquote>
+</blockquote>
+
+</a><a name="liexpand">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> liexpand（濃度値線形変換）</h2>
+<blockquote>
+liexpand　[オプション]　入力画像　出力画像
+<br><br>
+<blockquote>
+オプション<br><br>
+<dl>
+<dt> -h high
+</dt><dd> 濃度値 high を最大値（255）に写す（デフォルト 自動検出）
+</dd><dt> -l low
+</dt><dd> 濃度値 low を最小値（0）に写す（デフォルト 自動検出）
+<!---
+<DT> -t top
+<DD> 変換後の濃度値の最大値を top にする（デフォルト 255）
+<DT> -b bottom
+<DD> 変換後の濃度値の最小値を bottom にする（デフォルト 0）
+--->
+</dd></dl>
+</blockquote>
+<br>
+【例】kanji.pgm の濃度値[65,120]を[0,255]に写して，kekka.pgm に保存。
+<br>
+<blockquote>
+liexpand -h 120 -l 65 kanji.pgm kekka.pgm
+</blockquote>
+</blockquote>
+
+</a><a name="histplane">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> histplane（ヒストグラム平坦化）</h2>
+<blockquote>
+histplane　入力画像　出力画像
+<br><br>
+【例】kanji.pgm をヒストグラム平坦化して，kekka.pgm に保存。
+<br>
+<blockquote>
+histplane kanji.pgm kekka.pgm
+</blockquote>
+</blockquote>
+
+</a><a name="reverce">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> reverce（濃度値反転）</h2>
+<blockquote>
+reverce　入力画像　出力画像
+<br><br>
+【例】kanji.pgm の濃度値を反転し，kekka.pgm に保存。
+<br>
+<blockquote>
+histimage -s kanji.pgm kekka.pgm
+</blockquote>
+</blockquote>
+
+
+</a><a name="filter">
+</a><a name="gradient">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> gradient（１次微分）</h2>
+<blockquote>
+gradient　[オプション]　入力画像　出力画像
+<br><br>
+<blockquote>
+オプション<br><br>
+<dl>
+<dt> -r
+</dt><dd> roberts のオペレータを使う。
+</dd><dt> -s
+</dt><dd> sobel のオペレータを使う。
+</dd><dt> -a amp
+</dt><dd> 微分した濃度値を amp 倍する。
+</dd></dl>
+</blockquote>
+<br>
+【例】kanji.pgm を微分し，見やすいよう濃度値を 4 倍し，kekka.pgm に保存。
+<br>
+<blockquote>
+gradient -a 4 kanji.pgm kekka.pgm
+</blockquote>
+</blockquote>
+
+</a><a name="laplacian">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> laplacian（２次微分）</h2>
+<blockquote>
+laplacian　[オプション]　入力画像　出力画像
+<br><br>
+<blockquote>
+オプション<br><br>
+<dl>
+<dt> -t n
+</dt><dd> オペレータ n を使う（1≦n≦3，デフォルト 1）<br>
+<pre>1 :  0 -1  0    2 : -1 -1 -1   3 :  1 -2  1
+    -1  4 -1        -1  8 -1       -2  4 -2
+     0 -1  0        -1 -1 -1        1 -2  1
+</pre>
+</dd><dt> -a amp
+</dt><dd> 微分した濃度値を amp 倍する。
+</dd></dl>
+</blockquote>
+<br>
+【例】kanji.pgm をオペレータ 2 で微分し，見やすいよう濃度値を 3 倍し，kekka.pgm に保存。
+<br>
+<blockquote>
+laplacian -t 2 -a 3 kanji.pgm kekka.pgm
+</blockquote>
+</blockquote>
+
+</a><a name="template">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> template（テンプレート輪郭抽出）</h2>
+<blockquote>
+template　[オプション]　入力画像　出力画像
+<br><br>
+<blockquote>
+オプション<br><br>
+<dl>
+<dt> -a amp
+</dt><dd> 処理した濃度値を amp 倍する。
+</dd></dl>
+</blockquote>
+<br>
+【例】kanji.pgm の輪郭を抽出し，見やすいよう濃度値を 2 倍し，kekka.pgm に保存。
+<br>
+<blockquote>
+template -a 3 kanji.pgm kekka.pgm
+</blockquote>
+</blockquote>
+
+</a><a name="smooth">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> smooth（平滑化）</h2>
+<blockquote>
+smooth　[オプション]　入力画像　出力画像
+<br><br>
+<blockquote>
+オプション<br><br>
+<dl>
+<dt> -i
+</dt><dd> 移動平均フィルタを用いる（デフォルトはメディアンフィルタ）。
+<!---
+<DT> -n n
+<DD> フィルタを n 回適用
+--->
+</dd></dl>
+</blockquote>
+<br>
+【例】kanji.pgm を移動平均フィルタを用いて平滑化し，kekka.pgm に保存。
+<br>
+<blockquote>
+smooth -i kanji.pgm kekka.pgm
+</blockquote>
+</blockquote>
+
+
+</a><a name="binary">
+</a><a name="thinning">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> thinning（細線化）</h2>
+<blockquote>
+thinning　入力画像　出力画像
+<br><br>
+【例】２値画像 nichikanji.pgm を細線化し，kekka.pgm に保存。
+<br>
+<blockquote>
+thinning nichikanji.pgm kekka.pgm
+</blockquote>
+</blockquote>
+
+</a><a name="labeling">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> labeling（２値画像のラベリング）</h2>
+<blockquote>
+labeling　入力画像　出力画像
+<br><br>
+【例】２値画像 nichi.pgm をラベリングして，ラベリング画像を kekka.pgm へ保存。
+<br>
+<blockquote>
+labeling nichi.pgm kekka.pgm
+</blockquote>
+</blockquote>
+
+</a><a name="features">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> features（特徴検出）</h2>
+<blockquote>
+features　入力画像
+<br><br>
+<blockquote>
+結果<br><br>
+<dl>
+<dt> no.
+</dt><dd> 物体の番号
+</dd><dt> S
+</dt><dd> 面積
+</dd><dt> L
+</dt><dd> 周囲長
+</dd><dt> R
+</dt><dd> 円形率
+</dd><dt> G(x,y)
+</dt><dd> 重心の位置 (x, y)
+</dd></dl>
+</blockquote>
+<br>
+【例】ラベリング画像 label.pgm の各物体の特徴量を計算する。
+<br>
+<blockquote>
+features label.pgm
+</blockquote>
+</blockquote>
+
+</a><a name="exfeatures">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> features（特徴による抽出）</h2>
+<blockquote>
+features　[オプション]　入力画像　出力画像
+<br><br>
+<blockquote>
+オプション<br><br>
+<dl>
+<dt> -sh n
+</dt><dd> 面積 n 以下のものを抽出。
+</dd><dt> -sl n
+</dt><dd> 面積 n 以上のものを抽出。
+</dd><dt> -lh n
+</dt><dd> 周囲長 n 以下のものを抽出。
+</dd><dt> -ll n
+</dt><dd> 周囲長 n 以上のものを抽出。
+</dd><dt> -rh n
+</dt><dd> 円形率 n 以下のものを抽出。
+</dd><dt> -rl n
+</dt><dd> 円形率 n 以上のものを抽出。
+</dd><dt> -xh n
+</dt><dd> 重心のx座標 n 以下のものを抽出。
+</dd><dt> -xl n
+</dt><dd> 重心のx座標 n 以上のものを抽出。
+</dd><dt> -yh n
+</dt><dd> 重心のy座標 n 以下のものを抽出。
+</dd><dt> -yl n
+</dt><dd> 重心のy座標 n 以上のものを抽出。
+</dd></dl>
+</blockquote>
+<br>
+【例】ラベリング画像 label.pgm から，面積 100 以上 120 以下のものを抽出し，kekka.pgm に保存。
+<br>
+<blockquote>
+features -sh 120 -sl 100 label.pgm kekka.pgm
+</blockquote>
+<br>
+【例】ラベリング画像 label.pgm から，円形度が 0.5 以下のものを抽出し，kekka.pgm に保存。
+<br>
+<blockquote>
+features -rh 0.5 label.pgm kekka.pgm
+</blockquote>
+</blockquote>
+
+
+</a><a name="mask">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> mask（マスクを使って画像を抜き出す）</h2>
+<blockquote>
+mask　[オプション]　入力画像　出力画像
+<br><br>
+<blockquote>
+オプション<br><br>
+<dl>
+<dt> -f mask_file
+</dt><dd> マスクに用いる２値画像のファイル名を指定する（デフォルト mask.pgm）
+</dd></dl>
+</blockquote>
+<br>
+【例】マスク画像 mask.pgm を用いて fruits.pgm から画像を抜き出し，kekka.pgm に保存。
+<br>
+<blockquote>
+mask fruits.pgm kekka.pgm
+</blockquote>
+</blockquote>
+
+
+</a><a name="geometrical">
+</a><a name="scale">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> scale（拡大・縮小）</h2>
+<blockquote>
+scale　[オプション]　入力画像　出力画像
+<br><br>
+<blockquote>
+オプション<br><br>
+<dl>
+<dt> -n
+</dt><dd> 最近傍法を用いる（デフォルト　線形補間法）
+</dd><dt> -zx x_scale
+</dt><dd> 横方向の拡大率を x_scale にする（デフォルト 1.0）。
+</dd><dt> -zy y_scale
+</dt><dd> 縦方向の拡大率を y_scale にする（デフォルト 1.0）。
+</dd></dl>
+</blockquote>
+<br>
+【例】czp.pgm を縦横２分の１に縮小し，kekka.pgm に保存。
+<br>
+<blockquote>
+scale -zx 0.5 -zy 0.5 czp.pgm kekka.pgm
+</blockquote>
+<br>
+【例】image2s.pgm を最近傍法を用いて縦４倍，横２倍に拡大し kekka.pgm に保存。
+<blockquote>
+scale -n -zx 2 -zy 4 image2s.pgm kekka.pgm
+</blockquote>
+</blockquote>
+
+</a><a name="move">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> move（位置の移動）</h2>
+<blockquote>
+move　[オプション]　入力画像　出力画像
+<br><br>
+<blockquote>
+オプション<br><br>
+<dl>
+<dt> -px x_move
+</dt><dd> 横方向の移動量を x_move にする（デフォルト 0.0）。
+</dd><dt> -py y_move
+</dt><dd> 縦方向の移動量を y_move にする（デフォルト 0.0）。
+</dd></dl>
+</blockquote>
+<br>
+【例】kanji.pgm を横に5，縦に10移動し，kekka.pgm に保存。
+<br>
+<blockquote>
+move -px 5 -py 10 czp.pgm kekka.pgm
+</blockquote>
+</blockquote>
+
+</a><a name="rotation">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> rotation（回転）</h2>
+<blockquote>
+rotation　[オプション]　入力画像　出力画像
+<br><br>
+<blockquote>
+オプション<br><br>
+<dl>
+<dt> -r deg
+</dt><dd> 回転角度を deg [°]にする（デフォルト 0°）。
+</dd></dl>
+</blockquote>
+<br>
+【例】kanji.pgm を15°回転し，kekka.pgm に保存。
+<br>
+<blockquote>
+rotation -r 15 kanji.pgm kekka.pgm
+</blockquote>
+</blockquote>
+
+</a><a name="affine">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> affine（アフィン変換）</h2>
+<blockquote>
+affine　[オプション]　入力画像　出力画像
+<br><br>
+<blockquote>
+オプション<br><br>
+<dl>
+<dt> -px x_move
+</dt><dd> 横方向の移動量を x_move にする（デフォルト 0.0）。
+</dd><dt> -py y_move
+</dt><dd> 縦方向の移動量を y_move にする（デフォルト 0.0）。
+</dd><dt> -zx x_scale
+</dt><dd> 横方向の拡大率を x_scale にする（デフォルト 1.0）。
+</dd><dt> -zy y_scale
+</dt><dd> 縦方向の拡大率を y_scale にする（デフォルト 1.0）。
+</dd><dt> -r deg
+</dt><dd> 回転角度を deg [°]にする（デフォルト 0°）。
+</dd></dl>
+</blockquote>
+</blockquote>
+
+</a><a name="perspect">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> perspect（透視変換）</h2>
+<blockquote>
+perspect　[オプション]　入力画像　出力画像
+<br><br>
+<blockquote>
+オプション<br><br>
+<dl>
+<dt> -zx x_scale
+</dt><dd> 横方向の拡大率を x_scale にする（デフォルト 1.0）。
+</dd><dt> -zy y_scale
+</dt><dd> 縦方向の拡大率を y_scale にする（デフォルト 1.0）。
+</dd><dt> -px x_move
+</dt><dd> x方向の移動量を x_move にする（デフォルト 0.0）。
+</dd><dt> -py y_move
+</dt><dd> y方向の移動量を y_move にする（デフォルト 0.0）。
+</dd><dt> -pz z_move
+</dt><dd> z方向の移動量を z_move にする（デフォルト 0.0）。
+</dd><dt> -rz z_deg
+</dt><dd> z軸回りの回転角度を z_deg [°]にする（デフォルト 0°）。
+</dd><dt> -rx x_deg
+</dt><dd> x軸回りの回転角度を x_deg [°]にする（デフォルト 0°）。
+</dd><dt> -ry y_deg
+</dt><dd> y軸回りの回転角度を y_deg [°]にする（デフォルト 0°）。
+</dd><dt> -v viewpoint
+</dt><dd> 視点の位置を (0, 0, viewpoint) にする（デフォルト 10）。
+</dd><dt> -s screen
+</dt><dd> スクリーンの位置を (0, 0, screen) にする（デフォルト 10）。
+</dd></dl>
+</blockquote>
+<br>
+【例】kanji.pgm を横方向に 1.5 倍，縦方向に 3.0 倍し，z 軸回りに 10°，
+x 軸回りに -75°，y 軸回りに 10°回転し，視点を 10，スクリーンを 5 にして，
+透視変換し kekka.pgm に保存。
+<br>
+<blockquote>
+perspect -zx 1.5 -zy 3.0 -rz 10 -rx -17 -ry 10 -s 5 kanji.pgm kekka.pgm
+</blockquote>
+</blockquote>
+
+</a><a name="sampling">
+</a><a name="sample">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> sample（再標本化）</h2>
+<blockquote>
+sample　[オプション]　入力画像　出力画像
+<br><br>
+<blockquote>
+オプション<br><br>
+<dl>
+<dt> -h n
+</dt><dd> 横方向のサンプリング間隔を n 倍（整数倍）にする（デフォルト 1）。
+</dd><dt> -v n
+</dt><dd> 縦方向のサンプリング間隔を n 倍（整数倍）にする（デフォルト 1）。
+</dd><dt> -f ctl
+</dt><dd> サンプリングフィルタの制御（0≦ctl≦2, デフォルト 0）。<br>
+     ctl = 0 : フィルタ無し<br>
+     ctr = 1 : フィルタあり<br>
+     ctr = 2 : フィルタのみ（再サンプリング無し）
+</dd></dl>
+</blockquote>
+<br>
+【例】kanji.pgm を縦横 4 倍の間隔で再サンプリング（フィルタあり）し，kekka.pgm に保存。
+<br>
+<blockquote>
+sample -h 4 -v 4 -f 1 kanji.pgm kekka.pgm
+</blockquote>
+</blockquote>
+
+</a><a name="quantize">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> quantize（再量子化）</h2>
+<blockquote>
+quantize　[オプション]　入力画像　出力画像
+<br><br>
+<blockquote>
+オプション<br><br>
+<dl>
+<dt> -b n
+</dt><dd> n ビットに再量子化にする（1≦n≦8, デフォルト 8）。
+</dd></dl>
+</blockquote>
+<br>
+【例】kanji.pgm を 4 ビットに再量子化し，kekka.pgm に保存。
+<br>
+<blockquote>
+quantize -b 4 kanji.pgm kekka.pgm
+</blockquote>
+</blockquote>
+
+</a><a name="fourier">
+</a><a name="fft">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> fftimage（ＦＦＴ）</h2>
+<blockquote>
+fftimage　入力画像　出力画像
+<br><br>
+<br>
+【例】kanji.pgm をＦＦＴし，kekka.pgm に保存。
+<br>
+<blockquote>
+fftimage kanji.pgm kekka.pgm
+</blockquote>
+</blockquote>
+
+</a><a name="fftfilter">
+<!--- --------------------------------- --->
+<h2><font size="-2" color="darkblue">■</font> fftfilter（ＦＦＴフィルタ）</h2>
+<blockquote>
+fftfilter　[オプション]　入力画像　出力画像
+<br><br>
+<blockquote>
+オプション<br><br>
+<dl>
+<dt> -a low
+</dt><dd> low 以上の周波数を通過する（デフォルト 0）。
+</dd><dt> -b high
+</dt><dd> high 以下の周波数を通過する（デフォルト 90.51）。
+</dd></dl>
+</blockquote>
+<br>
+【例】kanji.pgm にローパスフィルタ（遮断周波数 10）をかけ，kekka.pgm に保存。
+<br>
+<blockquote>
+fftfilter -b 10 kanji.pgm kekka.pgm
+</blockquote>
+</blockquote>
+
+<h1><font color="blue">■</font>上級テクニック</h1>
+
+上記の各コマンドの出力を省略すると標準出力へ出力します。
+さらに入力を省略すると標準入力から入力します。
+これを使えば，いくつかの処理を一度に実行することができます。
+<br><br>
+【例】kanji.pgm をしきい値 148 で２値化して細線化し，kekka.pgm に保存する。
+<br>
+<blockquote>
+threshold -t 148 kanji.pgm | thinning &gt; kekka.pgm
+</blockquote>
+
+
+
+
+</a></body></html>
